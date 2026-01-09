@@ -1,10 +1,9 @@
 <template>
   <div>
-    <h1>我是App</h1>
+    <h1>我新增一个标题</h1>
   </div>
 </template>
 
 <script setup lang="ts"></script>
 
-<style scoped>
-</style>
+<style scoped></style>
