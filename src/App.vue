@@ -1,9 +1,16 @@
 <template>
   <div>
-    <h1>我新增一个标题</h1>
+    <router-view></router-view>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts" name="App">
+import { onMounted } from 'vue'
+import { reqLogin } from './api/user'
 
-<style scoped></style>
+onMounted(() => {
+  reqLogin({ username: 'admin', password: '111111' })
+})
+</script>
+
+<style scoped lang="scss"></style>
