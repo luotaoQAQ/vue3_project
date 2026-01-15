@@ -55,8 +55,6 @@ router.beforeEach(async (to, from, next) => {
       next({ path: '/login', query: { redirect: to.path } })
     }
   }
-
-  next()
 })
 
 // 后置守卫

@@ -44,4 +44,7 @@ app.use(pinia)
 // 路由鉴权
 import './permission'
 
+// 引入暗黑模式的样式
+import 'element-plus/theme-chalk/dark/css-vars.css'
+
 app.mount('#app')

@@ -111,7 +111,7 @@ const rules = reactive<FormRules>({
             如果不通过也调用cb，只不过要注入错误的提示信息
   */
 function checkUserName(rule: any, value: any, callback: any) {
-  if (/^\w{5,}$/.test(value)) {
+  if (/^[\w\u4e00-\u9fa5]{5,}$/.test(value)) {
     callback()
   } else {
     callback(new Error('用户名长度至少五位'))

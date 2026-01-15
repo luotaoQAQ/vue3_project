@@ -23,7 +23,8 @@ export default defineConfig(({ command, mode }) => {
         symbolId: 'icon-[dir]-[name]',
       }),
       viteMockServe({
-        localEnabled: command === 'serve',
+        mockPath: 'mock',
+        localEnabled: command === 'serve'
       }),
     ],
     resolve: {

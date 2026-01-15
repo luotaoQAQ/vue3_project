@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import { reqLogin, reqUserInfo, reqLogout } from '@/api/user'
 // 引入数据类型
 // import type { loginForm, loginResponseData } from "@/api/user/type";
+import type { loginFormData, loginResponseData, userInfoResponseData } from "@/api/user/type";
 import type { userState } from './types'
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
 // 引入常量路由
@@ -22,10 +23,10 @@ let useUserStore = defineStore('User', {
   actions: {
     // 真实接口
     // 用户登录的方法
-    async userLogin(data: any) {
+    async userLogin(data: loginFormData) {
       // 成功获取到token
-      const result: any = await reqLogin(data)
-
+      const result: loginResponseData = await reqLogin(data)
+      
       if (result.code === 200) {
         this.token = result.data as string
         // 本地存储
@@ -40,7 +41,7 @@ let useUserStore = defineStore('User', {
     // 获取用户信息的方法
     async userInfo() {
       // 存储用户信息
-      const result = await reqUserInfo()
+      const result: userInfoResponseData = await reqUserInfo()
 
       if (result.code === 200) {
         this.username = result.data.name
@@ -53,8 +54,7 @@ let useUserStore = defineStore('User', {
 
     // 退出登录
     async userLogout() {
-      const result = await reqLogout()
-      console.log(result)
+      const result: any = await reqLogout()
 
       if (result.code === 200) {
         this.token = ''
