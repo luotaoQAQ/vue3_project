@@ -1,12 +1,10 @@
 <template>
-  <div class="map-container" ref="map">
-
-  </div>
+  <div class="map-container" ref="map"></div>
 </template>
 
-<script setup lang='ts' name="Map">
+<script setup lang="ts" name="Map">
 import * as echarts from 'echarts'
-import { onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue'
 import chinaJSON from './china.json'
 
 let map = ref()
@@ -23,7 +21,7 @@ onMounted(() => {
       label: {
         show: true,
         color: 'white',
-        fontSize: 14
+        fontSize: 14,
       },
       itemStyle: {
         color: {
@@ -32,24 +30,29 @@ onMounted(() => {
           y: 0,
           x2: 0,
           y2: 1,
-          colorStops: [{
-            offset: 0, color: 'red' // 0% 处的颜色
-          }, {
-            offset: 1, color: 'blue' // 100% 处的颜色
-          }],
-          global: false // 缺省为 false
+          colorStops: [
+            {
+              offset: 0,
+              color: 'red', // 0% 处的颜色
+            },
+            {
+              offset: 1,
+              color: 'blue', // 100% 处的颜色
+            },
+          ],
+          global: false, // 缺省为 false
         },
-        opacity: 0.8
+        opacity: 0.8,
       },
       emphasis: {
         itemStyle: {
-          color: 'red'
+          color: 'red',
         },
         label: {
           fontSize: 30,
-          color: 'white'
-        }
-      }
+          color: 'white',
+        },
+      },
     },
     series: [
       {
@@ -58,23 +61,23 @@ onMounted(() => {
           {
             coords: [
               [116.4, 39.9], // 起点
-              [119.3, 26.1]  // 终点
+              [119.3, 26.1], // 终点
             ],
 
             lineStyle: {
               color: 'black',
-              width: 10
-            }
-          }
+              width: 10,
+            },
+          },
         ],
         effect: {
           show: true,
           symbol: 'arrow',
           symbolSize: 20,
-          color: 'red'
-        }
-      }
-    ]
+          color: 'red',
+        },
+      },
+    ],
   })
 })
 </script>

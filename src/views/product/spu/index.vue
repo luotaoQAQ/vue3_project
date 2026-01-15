@@ -2,11 +2,23 @@
   <div>
     <Category :scene="scene"></Category>
 
-    <el-card style="margin: 10px 0;">
+    <el-card style="margin: 10px 0">
       <div v-show="scene === 0">
-        <el-button type="primary" icon="Plus" :disabled="!categoryStore.c3Id" @click="addSpu">添加SPU</el-button>
-        <el-table :data="spuArr" border style="margin: 10px 0;">
-          <el-table-column label="序号" type="index" align="center" width="80"></el-table-column>
+        <el-button
+          type="primary"
+          icon="Plus"
+          :disabled="!categoryStore.c3Id"
+          @click="addSpu"
+        >
+          添加SPU
+        </el-button>
+        <el-table :data="spuArr" border style="margin: 10px 0">
+          <el-table-column
+            label="序号"
+            type="index"
+            align="center"
+            width="80"
+          ></el-table-column>
           <el-table-column prop="spuName" label="SPU名称"></el-table-column>
           <el-table-column label="SPU描述">
             <template #default="{ row }">
@@ -25,26 +37,53 @@
           <el-table-column label="SPU操作">
             <template #default="{ row }">
               <el-tooltip effect="dark" content="添加SKU" placement="top">
-                <el-button type="primary" icon="Plus" @click="addSku(row)"></el-button>
+                <el-button
+                  type="primary"
+                  icon="Plus"
+                  @click="addSku(row)"
+                ></el-button>
               </el-tooltip>
               <el-tooltip effect="dark" content="修改SPU" placement="top">
-                <el-button type="warning" icon="Edit" @click="updateSpu(row)"></el-button>
+                <el-button
+                  type="warning"
+                  icon="Edit"
+                  @click="updateSpu(row)"
+                ></el-button>
               </el-tooltip>
               <el-tooltip effect="dark" content="查看SKU列表" placement="top">
-                <el-button type="info" icon="InfoFilled" @click="viewSkuList(row.id)"></el-button>
+                <el-button
+                  type="info"
+                  icon="InfoFilled"
+                  @click="viewSkuList(row.id)"
+                ></el-button>
               </el-tooltip>
-              <el-popconfirm :title="`你确定要删除 ${row.spuName} 吗?`" width="200" icon="Warning" @confirm="removeSpu(row.id)">
+              <el-popconfirm
+                :title="`你确定要删除 ${row.spuName} 吗?`"
+                width="200"
+                icon="Warning"
+                @confirm="removeSpu(row.id)"
+              >
                 <template #reference>
-                  <el-button type="danger" icon="Delete" title="删除SPU"></el-button>
+                  <el-button
+                    type="danger"
+                    icon="Delete"
+                    title="删除SPU"
+                  ></el-button>
                 </template>
               </el-popconfirm>
             </template>
           </el-table-column>
         </el-table>
-        <el-pagination v-model:current-page="pageNo" v-model:page-size="limit" :page-sizes="[3, 5, 7, 9]"
-          layout="prev, pager, next, jumper, ->, sizes, total" :background="true" size="small" :total="total"
-          @change="getSpu">
-        </el-pagination>
+        <el-pagination
+          v-model:current-page="pageNo"
+          v-model:page-size="limit"
+          :page-sizes="[3, 5, 7, 9]"
+          layout="prev, pager, next, jumper, ->, sizes, total"
+          :background="true"
+          size="small"
+          :total="total"
+          @change="getSpu"
+        ></el-pagination>
       </div>
 
       <!-- 添加/修改SPU -->
@@ -65,7 +104,7 @@
           <el-table-column prop="weight" label="SKU重量"></el-table-column>
           <el-table-column label="SKU图片">
             <template #default="{ row }">
-              <img :src="row.skuDefaultImg" style="width: 100px;">
+              <img :src="row.skuDefaultImg" style="width: 100px" />
             </template>
           </el-table-column>
         </el-table>
@@ -75,13 +114,17 @@
 </template>
 
 <script setup lang="ts" name="Spu">
-import { onBeforeUnmount, ref, watch } from 'vue';
-import useCategoryStore from '@/store/modules/category';
-import { reqRemoveSpu, reqSkuListBySpuId, reqSpuList } from '@/api/product/spu';
-import type { skuData, skuListBySpuIdResponseData, spuData } from '@/api/product/spu/type';
-import SpuForm from './spuForm.vue';
-import SkuForm from './skuForm.vue';
-import { ElMessage } from 'element-plus';
+import { onBeforeUnmount, ref, watch } from 'vue'
+import useCategoryStore from '@/store/modules/category'
+import { reqRemoveSpu, reqSkuListBySpuId, reqSpuList } from '@/api/product/spu'
+import type {
+  skuData,
+  skuListBySpuIdResponseData,
+  spuData,
+} from '@/api/product/spu/type'
+import SpuForm from './spuForm.vue'
+import SkuForm from './skuForm.vue'
+import { ElMessage } from 'element-plus'
 
 const categoryStore = useCategoryStore()
 
@@ -108,11 +151,14 @@ onBeforeUnmount(() => {
   categoryStore.$reset()
 })
 
-watch(() => categoryStore.c3Id, () => {
-  spuArr.value = []
-  if (!categoryStore.c3Id) return
-  getSpu()
-})
+watch(
+  () => categoryStore.c3Id,
+  () => {
+    spuArr.value = []
+    if (!categoryStore.c3Id) return
+    getSpu()
+  },
+)
 
 async function getSpu() {
   const result = await reqSpuList(pageNo.value, limit.value, categoryStore.c3Id)
@@ -146,7 +192,7 @@ function updateSpu(row: spuData) {
 // 查看SKU列表按钮的回调
 async function viewSkuList(id: number) {
   const result: skuListBySpuIdResponseData = await reqSkuListBySpuId(id)
-  console.log(result);
+  console.log(result)
   if (result.code === 200) {
     skuList.value = result.data
     // 对话框展示
@@ -158,11 +204,11 @@ async function viewSkuList(id: number) {
 async function removeSpu(id: number) {
   const result: any = await reqRemoveSpu(id)
 
-  if(result.code === 200){
-    ElMessage({type: 'success', message: '删除成功'})
+  if (result.code === 200) {
+    ElMessage({ type: 'success', message: '删除成功' })
     getSpu()
   } else {
-    ElMessage({type: 'error', message: '删除失败'})
+    ElMessage({ type: 'error', message: '删除失败' })
   }
 }
 
@@ -173,8 +219,6 @@ function changeScene(val: number) {
     getSpu()
   }
 }
-
-
 </script>
 
 <style scoped lang="scss">

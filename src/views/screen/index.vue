@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts" name="Screen">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref } from 'vue'
 import Top from './components/top/index.vue'
 import Tourist from './components/tourist/index.vue'
 import Sex from './components/sex/index.vue'
@@ -112,7 +112,6 @@ window.onresize = () => {
           background-color: yellow;
         }
       }
-
     }
   }
 }

@@ -2,7 +2,7 @@
   <div>
     <el-card>
       <div class="card-flex">
-        <img :src="userStore.avatar" alt="" class="avatar">
+        <img :src="userStore.avatar" alt="" class="avatar" />
         <div>
           <h3 class="title">{{ getTime() }}好！{{ userStore.username }}</h3>
           <p class="sub-title">{{ setting.title }}</p>
@@ -18,9 +18,9 @@
 
 <script setup lang="ts" name="Home">
 import useUserStore from '@/store/modules/user'
-import { getTime } from '@/utils/time';
-import setting from '@/setting';
-import { ref } from 'vue';
+import { getTime } from '@/utils/time'
+import setting from '@/setting'
+import { ref } from 'vue'
 
 const userStore = useUserStore()
 

@@ -1,13 +1,13 @@
 // 真实接口ts类型
 export interface loginFormData {
-  username: string,
+  username: string
   password: string
 }
 
 // 定义全部接口返回数据都有的数据类型
 export interface responseData {
-  code: number,
-  message: string,
+  code: number
+  message: string
   ok: boolean
 }
 
@@ -19,15 +19,13 @@ export interface loginResponseData extends responseData {
 // 获取用户信息返回的数据类型
 export interface userInfoResponseData extends responseData {
   data: {
-    routes: string[],
-    buttons: string[],
-    roles: string[],
-    name: string,
+    routes: string[]
+    buttons: string[]
+    roles: string[]
+    name: string
     avatar: string
   }
 }
-
-
 
 /* // 登录接口需要携带参数ts类型
 export interface loginForm {

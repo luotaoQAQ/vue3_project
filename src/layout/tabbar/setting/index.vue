@@ -5,10 +5,21 @@
   <el-popover placement="bottom" title="主题设置" width="300" trigger="click">
     <el-form>
       <el-form-item label="主题颜色">
-        <el-color-picker @change="changeColor" v-model="color" :predefine="predefineColors" />
+        <el-color-picker
+          @change="changeColor"
+          v-model="color"
+          :predefine="predefineColors"
+        />
       </el-form-item>
       <el-form-item label="暗黑模式">
-        <el-switch @change="changeDark" v-model="isDark" inline-prompt active-icon="Moon" inactive-icon="Sunny" style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"/>
+        <el-switch
+          @change="changeDark"
+          v-model="isDark"
+          inline-prompt
+          active-icon="Moon"
+          inactive-icon="Sunny"
+          style="--el-switch-on-color: #13ce66; --el-switch-off-color: #ff4949"
+        />
       </el-form-item>
     </el-form>
     <template #reference>
@@ -77,10 +88,11 @@ function fullScreen() {
 // HEX转RGBA
 const hexToRgba = (hex: string, alpha: number = 1) => {
   // 处理简写形式如 #fff
-  const fullHex = hex.length === 4 
-    ? `#${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}`
-    : hex
-    
+  const fullHex =
+    hex.length === 4
+      ? `#${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}`
+      : hex
+
   const r = parseInt(fullHex.slice(1, 3), 16)
   const g = parseInt(fullHex.slice(3, 5), 16)
   const b = parseInt(fullHex.slice(5, 7), 16)
@@ -119,7 +131,7 @@ function changeColor() {
   html.style.setProperty('--el-color-info-dark-2', color.value)
 }
 
-function changeDark(){
+function changeDark() {
   // 获取html根节点
   const html = document.documentElement
   // 根据isDark判断

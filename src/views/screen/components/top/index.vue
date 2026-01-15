@@ -13,10 +13,10 @@
   </div>
 </template>
 
-<script setup lang='ts' name="Top">
-import moment from 'moment';
-import { onBeforeUnmount, onMounted,  ref } from 'vue';
-import { useRouter } from 'vue-router'; 
+<script setup lang="ts" name="Top">
+import moment from 'moment'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const $router = useRouter()
 
@@ -24,7 +24,7 @@ let time = ref(moment().format('YYYY年MM月DD日 HH:MM:SS'))
 
 let timer = ref(0)
 
-function goHome(){
+function goHome() {
   $router.push('/home')
 }
 
@@ -47,13 +47,15 @@ onBeforeUnmount(() => {
 
   .left {
     flex: 1.5;
-    background: url('../../images/dataScreen-header-left-bg.png') center center/cover no-repeat;
+    background: url('../../images/dataScreen-header-left-bg.png') center
+      center/cover no-repeat;
 
     .left-btn {
       width: 150px;
       line-height: 40px;
       float: right;
-      background: url('../../images/dataScreen-header-btn-bg-l.png') center center/cover no-repeat;
+      background: url('../../images/dataScreen-header-btn-bg-l.png') center
+        center/cover no-repeat;
       text-align: center;
       color: #29fcff;
       font-size: 20px;
@@ -73,7 +75,8 @@ onBeforeUnmount(() => {
       width: 150px;
       line-height: 40px;
       float: left;
-      background: url('../../images/dataScreen-header-btn-bg-r.png') center center/cover no-repeat;
+      background: url('../../images/dataScreen-header-btn-bg-r.png') center
+        center/cover no-repeat;
       text-align: center;
     }
 

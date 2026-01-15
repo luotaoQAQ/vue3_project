@@ -1,13 +1,7 @@
 <template>
-  <div>
-
-  </div>
+  <div></div>
 </template>
 
-<script setup lang='ts' name="Age">
+<script setup lang="ts" name="Age"></script>
 
-</script>
-
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -3,7 +3,11 @@
     <div class="top">
       <p class="title">实时游客统计</p>
       <p class="bg"></p>
-      <p class="reserve">可预约总量<span>99999</span>人</p>
+      <p class="reserve">
+        可预约总量
+        <span>99999</span>
+        人
+      </p>
     </div>
     <div class="number">
       <span v-for="(item, index) in people" :key="index">{{ item }}</span>
@@ -12,8 +16,8 @@
   </div>
 </template>
 
-<script setup lang='ts' name="Tourist">
-import { onMounted, ref } from 'vue';
+<script setup lang="ts" name="Tourist">
+import { onMounted, ref } from 'vue'
 import * as echarts from 'echarts'
 import 'echarts-liquidfill'
 
@@ -26,7 +30,7 @@ onMounted(() => {
   myCharts.setOption({
     title: {
       text: '水球图',
-      left: 10
+      left: 10,
     },
     series: {
       type: 'liquidFill',
@@ -43,23 +47,24 @@ onMounted(() => {
           borderColor: '#294D99',
           borderWidth: 8,
           shadowBlur: 20,
-          shadowColor: 'rgba(0,0,0,.25)'
-        }
-      }
+          shadowColor: 'rgba(0,0,0,.25)',
+        },
+      },
     },
     grid: {
       left: 0,
       right: 0,
       top: 0,
-      bottom: 0
-    }
+      bottom: 0,
+    },
   })
 })
 </script>
 
 <style scoped lang="scss">
 .tourist-container {
-  background: url('../../images/dataScreen-main-lb.png') center center/cover no-repeat;
+  background: url('../../images/dataScreen-main-lb.png') center center/cover
+    no-repeat;
   margin-top: 15px;
   width: 80%;
 
@@ -74,7 +79,8 @@ onMounted(() => {
     .bg {
       width: 68px;
       height: 7px;
-      background: url('../../images/dataScreen-title.png') center center/cover no-repeat;
+      background: url('../../images/dataScreen-title.png') center center/cover
+        no-repeat;
       margin-top: 10px;
     }
 

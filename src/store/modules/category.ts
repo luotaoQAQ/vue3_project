@@ -1,7 +1,7 @@
-import { defineStore } from "pinia";
-import { reqCategory1, reqCategory2, reqCategory3 } from "@/api/product/attr";
-import type { categoryResponseData } from "@/api/product/attr/type";
-import type { categoryState } from "./types";
+import { defineStore } from 'pinia'
+import { reqCategory1, reqCategory2, reqCategory3 } from '@/api/product/attr'
+import type { categoryResponseData } from '@/api/product/attr/type'
+import type { categoryState } from './types'
 
 let useCategoryStore = defineStore('CategoryStore', {
   state(): categoryState {
@@ -11,7 +11,7 @@ let useCategoryStore = defineStore('CategoryStore', {
       c3Arr: [],
       c1Id: '',
       c2Id: '',
-      c3Id: ''
+      c3Id: '',
     }
   },
   actions: {
@@ -23,25 +23,23 @@ let useCategoryStore = defineStore('CategoryStore', {
       }
     },
 
-    async getC2List(){
+    async getC2List() {
       const result: categoryResponseData = await reqCategory2(this.c1Id)
-      
-      if(result.code === 200){
+
+      if (result.code === 200) {
         this.c2Arr = result.data
       }
     },
 
-    async getC3List(){
+    async getC3List() {
       const result: categoryResponseData = await reqCategory3(this.c2Id)
-      
-      if(result.code === 200){
+
+      if (result.code === 200) {
         this.c3Arr = result.data
       }
     },
   },
-  getters: {
-
-  }
+  getters: {},
 })
 
 export default useCategoryStore
