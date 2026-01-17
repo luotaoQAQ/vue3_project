@@ -49,6 +49,10 @@ export const constantRoute = [
       icon: 'Platform',
     },
   },
+]
+
+// 异步路由
+export const asyncRoute = [
   {
     name: 'Acl',
     path: '/acl',
@@ -145,6 +149,10 @@ export const constantRoute = [
       },
     ],
   },
+]
+
+// 任意路由
+export const anyRoute = [
   {
     name: 'Any',
     path: '/:pathMatch(.*)*',

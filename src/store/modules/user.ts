@@ -11,7 +11,24 @@ import type {
 import type { userState } from './types'
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
 // 引入常量路由
-import { constantRoute } from '@/router/routes'
+import { constantRoute, asyncRoute, anyRoute } from '@/router/routes'
+import type { RouteRecordRaw } from 'vue-router'
+import router from '@/router'
+// 引入深拷贝方法
+// @ts-ignore
+import cloneDeep from 'lodash/cloneDeep'
+
+// 用于过滤异步路由
+function filterAsyncRoute(asyncRoute: RouteRecordRaw[], routes: string[]) {
+  return asyncRoute.filter((item: any) => {
+    if (routes.includes(item.name)) {
+      if (item.children && item.children.length > 0) {
+        item.children = filterAsyncRoute(item.children, routes)
+      }
+      return true
+    }
+  })
+}
 
 let useUserStore = defineStore('User', {
   // 存储数据的地方
@@ -21,6 +38,7 @@ let useUserStore = defineStore('User', {
       menuRoutes: constantRoute, // 生成菜单需要的路由
       username: '',
       avatar: '',
+      buttons: [],
     }
   },
   // 处理异步/逻辑的地方
@@ -32,9 +50,9 @@ let useUserStore = defineStore('User', {
       const result: loginResponseData = await reqLogin(data)
 
       if (result.code === 200) {
-        this.token = result.data as string
+        this.token = result.data
         // 本地存储
-        SET_TOKEN(result.data as string)
+        SET_TOKEN(result.data)
         // 保证当前async函数返回一个成功的promise
         return 'ok'
       } else {
@@ -50,6 +68,19 @@ let useUserStore = defineStore('User', {
       if (result.code === 200) {
         this.username = result.data.name
         this.avatar = result.data.avatar
+        // 过滤异步路由
+        let userAsyncRoute = filterAsyncRoute(
+          cloneDeep(asyncRoute),
+          result.data.routes,
+        )
+        this.menuRoutes = [...constantRoute, ...userAsyncRoute, ...anyRoute]
+        // 目前只注册了常量路由，还需要动态追加
+        const dynamicRoute = [...userAsyncRoute, ...anyRoute]
+        dynamicRoute.forEach((route) => {
+          router.addRoute(route)
+        })
+        // 存储按钮权限
+        this.buttons = result.data.buttons
         return 'ok'
       } else {
         return Promise.reject(new Error(result.message))
@@ -64,6 +95,8 @@ let useUserStore = defineStore('User', {
         this.token = ''
         this.username = ''
         this.avatar = ''
+        this.buttons = []
+        this.menuRoutes = constantRoute
         REMOVE_TOKEN()
         return 'ok'
       } else {

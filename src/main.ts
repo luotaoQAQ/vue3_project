@@ -47,4 +47,8 @@ import './permission'
 // 引入暗黑模式的样式
 import 'element-plus/theme-chalk/dark/css-vars.css'
 
+// 引入自定义指令文件
+import { isHasButton } from './directive/has'
+isHasButton(app)
+
 app.mount('#app')

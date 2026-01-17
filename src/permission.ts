@@ -40,7 +40,11 @@ router.beforeEach(async (to, from, next) => {
       } else {
         try {
           await userStore.userInfo()
-          next()
+          /* 
+              刷新的时候，获取到用户信息，但异步路由可能还没有注册完毕，导致出现空白效果:
+                解决办法：在next里面加上...to
+          */
+          next({ ...to })
         } catch (error) {
           // token过期，获取不到信息了
           await userStore.userLogout()
